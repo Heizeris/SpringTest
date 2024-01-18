@@ -1,8 +1,10 @@
 package controller;
 
+import config.UserSecret;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import persistence.UserRepository;
@@ -10,7 +12,9 @@ import response.FavoriteSong;
 import response.User;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/favorites")
@@ -24,13 +28,20 @@ public class FavoriteSongController {
 
 
 
-    @GetMapping
-    public ResponseEntity<List<FavoriteSong>> getFavoriteSongs(@RequestParam String uuid) {
+@DeleteMapping public void deleteFavorites(
+        @RequestHeader String secret,
+        @RequestParam String id){
+
+
+
+}
+        @GetMapping
+        public ResponseEntity<List<FavoriteSong>> getFavoriteSongs(@RequestParam String uuid) {
         List<User> users = userRepository.findByUuid(uuid);
         if (users.isEmpty()) {
             return ResponseEntity.ok().body(new ArrayList<>());
         }
-        User user = users.get(0); // assuming uuid is unique, so we can get the first user
+        User user = users.get(0);
         return ResponseEntity.ok().body(user.getFavoriteSongs());
     }
 
