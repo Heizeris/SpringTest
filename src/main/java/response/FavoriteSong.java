@@ -19,4 +19,6 @@ public class FavoriteSong {
 
     private String artist;
     private String title;
+
+    private String lyrics;
 }
