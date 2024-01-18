@@ -1,4 +1,4 @@
-package model.response;
+package response;
 
 import lombok.Data;
 import lombok.Getter;

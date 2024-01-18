@@ -3,12 +3,10 @@ package controller;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import model.response.ArtistResponse;
+import response.Artist;
+import response.ArtistResponse;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -31,6 +29,12 @@ public class ArtistController {
         log.debug("Called get Artist works endpoint with Artist: {}", artist);
 
         return artistService.getSongsByArtist(artist);
+    }
+
+    public void editArtist(
+            @RequestBody Artist artist
+            ){
+        repository.save(artist);
     }
 
 }
